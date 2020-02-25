@@ -15,7 +15,7 @@
 function addNumbers(num1, num2) {
   return num1 + num2;
 }
-
+console.log(addNumbers(3,7));
 // ⭐️ Example Challenge end ⭐️
 
 
@@ -38,10 +38,14 @@ function addNumbers(num1, num2) {
  *   name: "Leia",
  *   email: "leia@leia.com",
  * }
+ * 
 */
-function makePersonObject(/* code here */) {
+function makePersonObject(id, name, email) {
   /* code here */
+  return {id, name, email};
 }
+console.log(makePersonObject(5, "Leila", "leia@leia.com"));
+
 
 /**
  * ### Challenge `getName`
@@ -56,9 +60,12 @@ function makePersonObject(/* code here */) {
  * passing { id: 1, name: 'Leia', email: 'leia@leia.com` } as the argument,
  * the returned value should look like `Hello, my name is Leia`.
 */
-function getName(/* code here */) {
-  /* code here */
+function getName(object){
+return `Hello, my name is ${object.name}`;
 }
+
+
+
 
 /**
  * ### Challenge `makeSmartPerson`
@@ -73,9 +80,49 @@ function getName(/* code here */) {
  *         and returns a string like `Hello, my name is {name}`.
  *         where `{name}` is the name passed into `makeSmartPerson`.
 */
-function makeSmartPerson(/* code here */) {
+// function makeSmartPerson(name) {
+//   /* code here */
+//   console.log(name);
+//   return {
+//     name: name,
+//     sum: function (num1,num2){
+//       return num1+num2;
+//     },
+//     speak:function (){
+//       return "Hello, my name is " + name;
+//     }    
+//   }
+// }
+
+
+function makeSmartPerson(name) {
   /* code here */
+  let someObject = {
+    name: name,
+    sum: function (num1,num2){
+      return num1+num2;
+    },
+    speak:function (){
+      return `Hello, my name is ${name}`;
+    }
+    
+  }
+  return someObject;
 }
+
+
+
+console.log(makeSmartPerson('Dino')); // ask about how to console.log sum and speak as function 
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -137,7 +184,20 @@ function get3rdCar(inventory) {
 */
 function getCarInfoByIndex(inventory, index) {
   /* code here */
+  let specificCar = inventory[index].car_make;
+  let specificModel = inventory[index].car_model;
+  return `This is a ${specificCar} ${specificModel}`;  
 }
+
+// console.log(getCarInfoByIndex(inventory, 0)); // ???????????????
+
+
+
+
+
+
+
+
 
 /**
  * ### Challenge `getLastCarInfo`
@@ -150,9 +210,16 @@ function getCarInfoByIndex(inventory, index) {
  * For example, if getLastCarInfo is invoked passing the inventory inside /data/inventory.js,
  * it will return `This is a Lincoln Town Car`.
 */
-function getLastCarInfo(/* code here */) {
+function getLastCarInfo(array) {
   /* code here */
+  let someManu = array[array.length-1].car_make;
+  let carModel = array[array.length-1].car_model;
+  return `This is a ${someManu} ${carModel}`;
 }
+
+
+
+
 
 /**
  * ### Challenge `getCarInfoById`
@@ -166,8 +233,12 @@ function getLastCarInfo(/* code here */) {
  * For example, if getCarInfoById is invoked with the inventory and the number 1,
  * it will return `This is a Lincoln Navigator`.
 */
-function getCarInfoById(/* code here */) {
+function getCarInfoById(array, number) {
   /* code here */
+
+  let carModel = array[number].car_make;
+  let carManu = array[number].car_model;                 ///////???
+  return `This is a ${carModel} ${carManu}`;
 }
 
 /**
@@ -178,9 +249,12 @@ function getCarInfoById(/* code here */) {
  *     (1) an array which is an inventory of cars like the one inside /data/inventory.js.
  * sortCarInventory returns an inventory that is sorted by car_model, ascending [A-Z].
 */
-function sortCarInventory(/* code here */) {
+function sortCarInventory(array) {
   /* code here */
+
 }
+  
+
 
 /**
  * ### Challenge `getModelYears`
