@@ -15,7 +15,7 @@
 function addNumbers(num1, num2) {
   return num1 + num2;
 }
-
+console.log(addNumbers(3,7));
 // ⭐️ Example Challenge end ⭐️
 
 
@@ -38,10 +38,14 @@ function addNumbers(num1, num2) {
  *   name: "Leia",
  *   email: "leia@leia.com",
  * }
+ * 
 */
-function makePersonObject(/* code here */) {
+function makePersonObject(id, name, email) {
   /* code here */
+  return {id, name, email};
 }
+console.log(makePersonObject(5, "Leila", "leia@leia.com"));
+
 
 /**
  * ### Challenge `getName`
@@ -56,9 +60,12 @@ function makePersonObject(/* code here */) {
  * passing { id: 1, name: 'Leia', email: 'leia@leia.com` } as the argument,
  * the returned value should look like `Hello, my name is Leia`.
 */
-function getName(/* code here */) {
-  /* code here */
+function getName(object){
+return `Hello, my name is ${object.name}`;
 }
+
+
+
 
 /**
  * ### Challenge `makeSmartPerson`
@@ -73,9 +80,49 @@ function getName(/* code here */) {
  *         and returns a string like `Hello, my name is {name}`.
  *         where `{name}` is the name passed into `makeSmartPerson`.
 */
-function makeSmartPerson(/* code here */) {
+// function makeSmartPerson(name) {
+//   /* code here */
+//   console.log(name);
+//   return {
+//     name: name,
+//     sum: function (num1,num2){
+//       return num1+num2;
+//     },
+//     speak:function (){
+//       return "Hello, my name is " + name;
+//     }    
+//   }
+// }
+
+
+function makeSmartPerson(name) {
   /* code here */
+  let someObject = {
+    name: name,
+    sum: function (num1,num2){
+      return num1+num2;
+    },
+    speak:function (){
+      return `Hello, my name is ${name}`;
+    }
+    
+  }
+  return someObject;
 }
+
+
+
+console.log(makeSmartPerson('Dino')); // ask about how to console.log sum and speak as function 
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -137,7 +184,20 @@ function get3rdCar(inventory) {
 */
 function getCarInfoByIndex(inventory, index) {
   /* code here */
+  let specificCar = inventory[index].car_make;
+  let specificModel = inventory[index].car_model;
+  return `This is a ${specificCar} ${specificModel}`;  
 }
+
+// console.log(getCarInfoByIndex(inventory, 0)); // ???????????????
+
+
+
+
+
+
+
+
 
 /**
  * ### Challenge `getLastCarInfo`
@@ -150,9 +210,16 @@ function getCarInfoByIndex(inventory, index) {
  * For example, if getLastCarInfo is invoked passing the inventory inside /data/inventory.js,
  * it will return `This is a Lincoln Town Car`.
 */
-function getLastCarInfo(/* code here */) {
+function getLastCarInfo(array) {
   /* code here */
+  let someManu = array[array.length-1].car_make;
+  let carModel = array[array.length-1].car_model;
+  return `This is a ${someManu} ${carModel}`;
 }
+
+
+
+
 
 /**
  * ### Challenge `getCarInfoById`
@@ -166,9 +233,15 @@ function getLastCarInfo(/* code here */) {
  * For example, if getCarInfoById is invoked with the inventory and the number 1,
  * it will return `This is a Lincoln Navigator`.
 */
-function getCarInfoById(/* code here */) {
+
   /* code here */
-}
+  function getCarInfoById(inv, id) {  
+    for (let i = 0; i < inv.length; i++){
+      if (inv[i].id === id) return `This is a ${inv[i].car_make} ${inv[i].car_model}`;      
+    }
+  }
+
+    
 
 /**
  * ### Challenge `sortCarInventory`
@@ -178,9 +251,23 @@ function getCarInfoById(/* code here */) {
  *     (1) an array which is an inventory of cars like the one inside /data/inventory.js.
  * sortCarInventory returns an inventory that is sorted by car_model, ascending [A-Z].
 */
-function sortCarInventory(/* code here */) {
+function sortCarInventory(array) {
   /* code here */
+  return array.sort(function(a,b){
+    let counter = 0;
+    if (a.car_model > b.car_model){
+      counter = 1;
+    } else if(a.car_model < b.car_model){
+      counter = -1;
+    }
+    return counter;
+    
+  })
 }
+
+
+  
+
 
 /**
  * ### Challenge `getModelYears`
@@ -191,9 +278,15 @@ function sortCarInventory(/* code here */) {
  *     (1) an array which is an inventory of cars like the one inside /data/inventory.js.
  * getModelYears returns an array containing all the 'car_year's in the inventory.
 */
-function getModelYears(/* code here */) {
+function getModelYears(arr) {
   /* code here */
+  let carYearArray = [];
+      for (let i = 0; i < arr.length; i++) { 
+      carYearArray.push(arr[i].car_year);      
+  }
+  return carYearArray;
 }
+
 
 /**
  * ### Challenge `getOlderCars`
@@ -207,8 +300,16 @@ function getModelYears(/* code here */) {
  * with a `car_year` which is at most the given desired max year,
  * in the same order as they appear in the original inventory.
 */
-function getOlderCars(/* code here */) {
+function getOlderCars(array, num) {
   /* code here */
+  let oldCars = [];
+  for (let i = 0; i <array.length; i ++){
+    if (array[i].car_year <= num){
+      oldCars.push(array[i]);
+    }
+  }
+  return oldCars;
+
 }
 
 /**
@@ -222,8 +323,17 @@ function getOlderCars(/* code here */) {
  * made by either `Audi` or `Mercedes-Benz` or `Volkswagen` or `BMW`,
  * in the same order as they appear in the original inventory.
 */
-function getGermanCars(/* code here */) {
+function getGermanCars(arr) {
   /* code here */
+  let germanCars = [];
+
+  for (let i = 0; i < arr.length; i++ ){
+    if (arr[i].car_make === "Audi" || arr[i].car_make === "Mercedes-Benz" || arr[i].car_make === "Volkswagen" || arr[i].car_make === "BMW"){
+     germanCars.push(arr[i]);  
+      }
+
+    } 
+  return germanCars;
 }
 
 /**
@@ -244,9 +354,9 @@ function getGermanCars(/* code here */) {
  *   return num * 2
  * }
 */
-const sum = null; // code here!
-const addFive = null; // code here!
-const argTimesTwo = null; // code here!
+const sum = (a, b) => a + b;
+const addFive = (num) => num +5;
+const argTimesTwo = (num) => num * 2;
 
 /**
  * ### Challenge `carMaker`
@@ -261,8 +371,9 @@ const argTimesTwo = null; // code here!
  *         (1) causes the odometer in the object to be increased by the distance,
  *         (2) returns the updated value of the `odometer`.
 */
-function carMaker(/* code here */) {
+function carMaker(num) {
   /* code here */
+
 }
 
 /// ////// END OF CHALLENGE /////////
